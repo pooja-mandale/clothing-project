@@ -3,12 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 
 const Bestseller = () => {
-  const location = useLocation();
 
-  const isActive = (path) =>
-    location.pathname === path
-      ? "bg-black text-white"
-      : "bg-transparent text-black hover:bg-black hover:text-white";
 
   return (
     <>

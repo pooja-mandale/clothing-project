@@ -18,9 +18,9 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "New Arrival", href: "/arrival" },
     { name: "Men", href: "/mens" },
-    { name: "Womewns", href: "/women" },
-    { name: "shop", href: "/shop" },
-    { name: "contact", href: "/contact" },
+    { name: "Women", href: "/women" },
+    { name: "Shop", href: "/shop" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -63,34 +63,36 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Icons */}
+          {/* Icons + LOGIN BUTTON */}
           <div className="hidden md:flex items-center space-x-6">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              <Search size={20} />
+
+            {/* Search */}
+            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Search size={20} className="text-gray-700 hover:text-gray-900" />
             </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              <User size={20} />
-            </motion.button>
+            {/* User */}
+            <a href="/login">
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <User size={20} className="text-gray-700 hover:text-gray-900" />
+              </motion.button>
+            </a>
 
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-gray-700 hover:text-gray-900 transition-colors relative"
-            >
-              <ShoppingBag size={20} />
+            {/* Cart */}
+            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative">
+              <ShoppingBag size={20} className="text-gray-700 hover:text-gray-900" />
               <span className="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>
             </motion.button>
+
+            {/* LOGIN BUTTON */}
+            <a
+              href="/login"
+              className="px-4 py-2 bg-black text-white rounded-full font-semibold hover:bg-gray-900 transition"
+            >
+              Login
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -116,6 +118,7 @@ const Navbar = () => {
             className="md:hidden bg-white border-t border-gray-200"
           >
             <div className="px-4 py-6 space-y-4">
+              
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -127,14 +130,17 @@ const Navbar = () => {
                 </a>
               ))}
 
+              {/* Icons */}
               <div className="flex items-center space-x-6 pt-4 border-t border-gray-200">
                 <button className="text-gray-700 hover:text-gray-900">
                   <Search size={20} />
                 </button>
 
-                <button className="text-gray-700 hover:text-gray-900">
-                  <User size={20} />
-                </button>
+                <a href="/login">
+                  <button className="text-gray-700 hover:text-gray-900">
+                    <User size={20} />
+                  </button>
+                </a>
 
                 <button className="text-gray-700 hover:text-gray-900 relative">
                   <ShoppingBag size={20} />
@@ -143,6 +149,14 @@ const Navbar = () => {
                   </span>
                 </button>
               </div>
+
+              {/* Mobile Login Button */}
+              <a
+                href="/login"
+                className="block w-full text-center bg-black text-white py-2 rounded-full font-semibold hover:bg-gray-900 transition"
+              >
+                Login
+              </a>
 
             </div>
           </motion.div>
