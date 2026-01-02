@@ -4,6 +4,7 @@ const SaleBanner = () => {
   return (
     <section className="w-full bg-white py-20 px-6 lg:px-16 relative overflow-hidden">
 
+
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
 
         {/* LEFT TEXT SECTION */}

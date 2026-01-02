@@ -6,12 +6,18 @@ import Mens from "./pages/Mens";
 import WomenPage from "./pages/WomenHero";
 import ShopPage from "./pages/Shop";
 import ContactPage from "./pages/Contact";
+import { Toaster } from "react-hot-toast";
+import VerifyOtp from "./authentcaton/VerifyOtp";
+import ResetPassword from "./authentcaton/ResetPassword";
+import Dashboard from "./admin/pages/Dashboard";
+import AdminLoginPage from "./admin/autentication/AdminLogin";
 
 // Lazy Loading Pages
 const Home = lazy(() => import("./pages/Home"));
 const NewArrival = lazy(() => import("./pages/NewArrival"));
-const Login = lazy(() => import("./pages/login"));
-const Register = lazy(() => import("./pages/Regster"));
+const Login = lazy(() => import("./authentcaton/login"));
+const Register = lazy(() => import("./authentcaton/Regster"));
+const ForgotPassword = lazy(() => import("./authentcaton/ForgotPassword"));
 
 /* ------------------------------------------
    LAYOUT 1 → NAVBAR दिसणार (Home/Shop/Mens…)
@@ -42,6 +48,7 @@ const AuthLayout = () => {
 const App = () => {
   return (
     <BrowserRouter>
+    <Toaster position="top-right" reverseOrder={false} />
       <Suspense fallback={<div className="p-10 text-center text-xl">Loading...</div>}>
 
         <Routes>
@@ -61,6 +68,13 @@ const App = () => {
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/verify-otp" element={<VerifyOtp />} />
+             <Route path="/reset-password" element={<ResetPassword />} />
+             <Route path="/dashboard" element={<Dashboard />} />
+             <Route path="/admin-login" element={<AdminLoginPage />} />
+            
+            
           </Route>
 
           {/* 404 */}
