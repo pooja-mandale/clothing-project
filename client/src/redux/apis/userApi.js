@@ -2,10 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
     reducerPath: "userApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: "https://clothing-project-eight.vercel.app/api/users",
-        credentials: "include"
-    }),
+     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/users`,credentials: "include" }),
     tagTypes: ["User"],
     endpoints: (builder) => ({
 

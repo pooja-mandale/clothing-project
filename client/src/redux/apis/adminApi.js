@@ -2,17 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const adminApi = createApi({
   reducerPath: "adminApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://clothing-project-eight.vercel.app/api/admin",
-    credentials: "include", // cookie support
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/admin`,credentials: "include" }),
   tagTypes: ["Admin"],
   endpoints: (builder) => ({
 
     // ✅ ADMIN REGISTER
     registerAdmin: builder.mutation({
       query: (data) => ({
-        url: "/register",
+        url: "//register-admin",
         method: "POST",
         body: data,
       }),
@@ -21,7 +18,7 @@ export const adminApi = createApi({
     // ✅ ADMIN LOGIN
   loginAdmin: builder.mutation({
   query: (data) => ({
-    url: "/login", // ⚠️ /admin-login नाही
+    url: "/login-admin", // ⚠️ /admin-login नाही
     method: "POST",
     body: data,
   }),
