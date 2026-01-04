@@ -2,37 +2,46 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
-const path = require("path")
-require("dotenv").config({ path: "./.env" })
+require("dotenv").config()
 
 const app = express()
+
+// 1. Fixed CORS: Removed the trailing slash from the production URL
 app.use(cors({
     origin: process.env.NODE_ENV === "production" 
-        ? "https://clothing-project-eight.vercel.app/" 
+        ? "https://clothing-project-eight.vercel.app" 
         : "http://localhost:5173", 
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
 
 app.use(cookieParser())
 app.use(express.json())
-// app.use(express.static("dist"))
 
+// 2. Routes
 app.use('/api/users', require('./routes/user.route'))
 app.use('/api/admin', require('./routes/admin.route'))
 
+// 3. Database Connection (Standard for Serverless)
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("MONGO CONNECTED"))
+    .catch(err => console.error("MONGO ERROR:", err))
 
+// 4. Global Error Handlers
 app.use((req, res) => {
     res.status(404).json({ message: "Resource Not Found" })
-    // res.sendFile(path.join(__dirname, "dist", "index.html"))
 })
+
 app.use((err, req, res, next) => {
-    console.log(err)
+    console.error(err)
     res.status(500).json({ message: "SERVER ERROR", error: err.message })
 })
-mongoose.connect(process.env.MONGO_URL)
-mongoose.connection.once("open", () => {
-    console.log("MONGO CONNECTED")
-    app.listen(process.env.PORT, () => console.log("SERVER RUNNING 🏃‍♂️"))
-})
+
+// 5. IMPORTANT: DO NOT wrap module.exports in the database listener
+// Vercel needs to find 'app' immediately.
+if (process.env.NODE_ENV !== "production") {
+    app.listen(process.env.PORT || 5000, () => console.log("SERVER RUNNING LOCAL"))
+}
+
+module.exports = app;
