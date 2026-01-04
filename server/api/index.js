@@ -20,8 +20,9 @@ app.use(cookieParser())
 app.use(express.json())
 
 // 2. Routes
-app.use('/api/users', require('./routes/user.route'))
-app.use('/api/admin', require('./routes/admin.route'))
+// Add ../ to look outside the api folder
+app.use('/api/users', require('../routes/user.route'))
+app.use('/api/admin', require('../routes/admin.route'))
 
 // 3. Database Connection (Standard for Serverless)
 mongoose.connect(process.env.MONGO_URL)
