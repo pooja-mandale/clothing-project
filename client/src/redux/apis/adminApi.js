@@ -9,7 +9,7 @@ export const adminApi = createApi({
     // ✅ ADMIN REGISTER
     registerAdmin: builder.mutation({
       query: (data) => ({
-        url: "//register-admin",
+        url: "/register-admin",
         method: "POST",
         body: data,
       }),
